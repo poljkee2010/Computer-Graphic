@@ -1,18 +1,16 @@
 <HTML>
 <body>
 	Hello World!
-	<canvas id='lab01' height="100" width="100" style='border-width: 3px'/>
+	<canvas id='lab01' height="100" width="100" style='border-width: 3px' />
 	<script>
 		var canvas = document.getElementById('lab01');
-		var ctx = canvas.getContext('2d'); //контекст граф.ресурса
+		var ctx = canvas.getContext('2d'); 
 		
 		ctx.fillStyle = '#ff0000';
 		ctx.fillRect(10,10,30,30);
+
 		
-		//ctx.fillStyle = 'ee00aa';
-		//ctx.fillRect(20,20,5,5);
-		
-		for($n=5; $n<39;) //цикл для рисования диагонали на квадрате
+		for($n=5; $n<39;)
 		{
 			ctx.fillRect($n,$n,2,2);
 		}
