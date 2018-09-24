@@ -32,7 +32,7 @@
           ctx.arc(i-23, 480, 45, 0, Math.PI*2, true);
           ctx.arc(i+37, 480, 45, 0, Math.PI*2, true);
           ctx.fill();
-          i = i + 120; 				
+          i = i + 170; 				
         }
         //trees
         for(let i = 40; i < 1110; )
@@ -44,6 +44,20 @@
           ctx.arc(i+7, 320, 60, 0, Math.PI*2, true);
           ctx.arc(i-23, 330, 45, 0, Math.PI*2, true);
           ctx.arc(i+37, 330, 45, 0, Math.PI*2, true);
+          ctx.fill();
+          i = i + 150; 				
+        }
+		
+		//trees
+        for(let i = 40; i < 1110; )
+        {
+          ctx.fillStyle = '#7B4513';
+          ctx.fillRect(i, 610, 15, 150); 
+          ctx.fillStyle = '#005400';
+          ctx.beginPath();
+          ctx.arc(i+7, 620, 60, 0, Math.PI*2, true);
+          ctx.arc(i-23, 630, 45, 0, Math.PI*2, true);
+          ctx.arc(i+37, 630, 45, 0, Math.PI*2, true);
           ctx.fill();
           i = i + 150; 				
         }
