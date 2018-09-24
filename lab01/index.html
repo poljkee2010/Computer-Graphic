@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Домашний работа №1</title>
+</head>
+<body>
+  <canvas id='lab01' height='1000' width='600' style='border-width: 3px' />     
+  <script>
+    var canvas = document.getElementById('lab01'); 
+    var ctx = canvas.getContext('2d'); 
+    var xVar=0;
+
+    setInterval(function(){
+
+        //sky
+      ctx.fillStyle = '#b0e0e6'; 
+      ctx.fillRect(0, 0, 1000, 600);
+
+      //earth 
+      ctx.fillStyle = '#008000';
+      ctx.fillRect(0, 400, 1250, 400);
+
+        //trees
+        for(let i = 40; i < 1110; )
+        {
+          ctx.fillStyle = '#7B4513';
+          ctx.fillRect(i, 500, 15, 150); 
+          ctx.fillStyle = '#005400';
+          ctx.beginPath();
+          ctx.arc(i+7, 470, 60, 0, Math.PI*2, true);
+          ctx.arc(i-23, 480, 45, 0, Math.PI*2, true);
+          ctx.arc(i+37, 480, 45, 0, Math.PI*2, true);
+          ctx.fill();
+          i = i + 120; 				
+        }
+        //trees
+        for(let i = 40; i < 1110; )
+        {
+          ctx.fillStyle = '#7B4513';
+          ctx.fillRect(i, 310, 15, 100); 
+          ctx.fillStyle = '#005400';
+          ctx.beginPath();
+          ctx.arc(i+7, 320, 60, 0, Math.PI*2, true);
+          ctx.arc(i-23, 330, 45, 0, Math.PI*2, true);
+          ctx.arc(i+37, 330, 45, 0, Math.PI*2, true);
+          ctx.fill();
+          i = i + 150; 				
+        }
+
+      xVar+=5;
+
+      //sun 
+      ctx.fillStyle = '#FFD700';
+      ctx.beginPath();
+      ctx.arc(200+xVar, 50, 50, 0, Math.PI*2, false);
+      ctx.fill();
+
+
+      ctx.beginPath();
+      ctx.arc(75+xVar,205,50,0,Math.PI*2,true); // Внешняя окружность
+      ctx.moveTo(110+xVar,205);
+
+      ctx.arc(75+xVar,205,35,0,Math.PI,false);  // рот (по часовой стрелке)
+      ctx.fill();	
+
+      ctx.moveTo(65+xVar,195);
+      ctx.fillStyle = '#FFD700';
+      ctx.arc(60+xVar,195,5,0,Math.PI*2,true);  // Левый глаз
+      ctx.fill();	
+
+      ctx.moveTo(95+xVar,195);
+      ctx.arc(90+xVar,195,5,0,Math.PI*2,true);  // Правый глаз
+      ctx.stroke();
+      ctx.closePath();
+
+  },20)
+  
+</script>
+</body>
+</html>
