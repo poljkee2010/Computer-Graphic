@@ -1,39 +1,11 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Домашний работа №1</title>
+</head>
 <body>
-	Hello World!
-	<canvas id='lab01' height="100" width="100" style='border-width: 3px' />
-	<script>
-		var canvas = document.getElementById('lab01');
-		var ctx = canvas.getContext('2d'); 
-		
-		ctx.fillStyle = '#ff0000';
-		ctx.fillRect(10,10,30,30);
-
-		
-		for($n=5; $n<39;)
-		{
-			ctx.fillRect($n,$n,2,2);
-		}
-		function onClick(event)
-		{
-			var x = event.offsetX;
-			var y = event.offsetY;
-			
-			ctx.fillRect(x,y,1,1);
-		}
-		
-		ctx.fillStyle = '#000000';
-		canvas.addEventListener('click',onClick,false);
-		
-		var xvar=0;
-		setInterval(function()
-		{
-			ctx.fillStyle = '#fffff';
-			ctx.fillRect(xvar,10,10,10);
-			xvar +=2;
-			ctx.fillStyle='';
-		},2000);
-		
-	</script>
+  <canvas id="lab01"></canvas>
+  <script src="script.js"></script>
 </body>
-</HTML>
+</html>
