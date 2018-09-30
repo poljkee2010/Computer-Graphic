@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<canvas id='lab02' height="1000" width="1500" style="border-width: 3px" />
+	<canvas id='lab02Double' height="1000" width="1500" style="border-width: 3px" />
+	<script>
+			var buffer = []; //массив для всех пикселей
+			var img = new Image(); 
+			img.src = 'img.jpg';
+			img.onload = function(){
+				Double(this); 
+			}
+
+			function Double(img){
+				var canvas = document.getElementById('lab02');
+				var ctx = canvas.getContext('2d');
+				ctx.drawImage(img,0,0); 
+
+				var imageData, imageDataDouble;
+				var data, dataDouble;
+				var tmpRed, tmpGreen, tmpBlue;
+
+				var alghoritm = function(){
+					for(var j = 0; j < img.height; j++){
+						for(var i = 0; i < img.width; i++){
+							if((j == 0) || (j == img.height) || (i == 0) || (i == img.width) //для граничных пикселей
+								imageData = ctx.getImageData(i, j, 3, 3); //квадрат 3х3
+								data = imageData.data;  
+								tmpRed = data[0]; 
+								tmpGreen = data[1];
+								tmpBlue = data[2];
+								
+								buffer.push(tmpRed);
+								buffer.push(tmpGreen);
+								buffer.push(tmpBlue);
+								buffer.push(255); //прозрачность
+							}
+							else{
+								imageData = ctx.getImageData(i, j, 3, 3);
+								data = imageData.data;
+								tmpRed = Math.floor(data[0], data[4], data[8], data[12], data[16], data[20], data[24], data[28], data[32] / 9); //округление в меньшую сторону
+								tmpGreen = Math.floor(data[1], data[5], data[9], data[13], data[17], data[21], data[25], data[29], data[33] / 9);
+								tmpBlue = Math.floor(data[2], data[6], data[10], data[14], data[18], data[22], data[26], data[30], data[34] / 9);
+								buffer.push(tmpRed);
+								buffer.push(tmpGreen);
+								buffer.push(tmpBlue);
+								buffer.push(255);
+							}
+						}
+					}
+				}
+				alghoritm(); //вызов
+				
+				//второй canvas
+				var canvasDouble = document.getElementById('lab02Double');
+				var ctx2 = canvasDouble.getContext('2d');
+
+				imageDataDouble = ctx2.getImageData(500, 0, img.width, img.height);
+				dataDouble = imageDataDouble.data;
+
+				for(i = 0; i < dataDouble.length; i++){
+					dataDouble[i] = buffer[i];
+				}
+				ctx2.putImageData(imageDataDouble, 600, 0);
+			}
+		</script>
+	</body>	
+</html>
