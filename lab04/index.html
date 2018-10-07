@@ -51,8 +51,8 @@ function set_sobel_filter(image_pix_data, img_width, img_height) {
     }
 };
 
-window.addEventListener("ImageLoaded", function(){
-	var ofo= document.getElementById('SelectFile');
+window.addEventListener("DOMContentLoaded", function(){
+	var ofo= document.getElementById('selectfile');
 	ofo.addEventListener("change",function(evt){
 
 		var tempimg = null;
