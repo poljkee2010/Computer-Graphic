@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Bezier</title>
+	<style>
+		#cvs{
+			border: 2px solid black;
+		}
+
+		h1{
+			text-align: center;
+			font-size: 20px;
+			margin: 15px
+		}
+
+		div{
+			display: flex;
+			flex-direction: column;
+		}
+
+		p{
+			margin: 2px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Кривые Безье</h1>
+	<canvas id="cvs" height="700" width="700"></canvas>
+
+	<div>
+		<button type="button" id="clear" style="width: 100px">Очистить</button>
+
+		<p>Окончание рисования - клик левой кнопкой мыши (не является точкой)</p>
+	</div>
+
+	<script>
+		var cvs = document.getElementById("cvs"), 
+		ctx = cvs.getContext("2d");
+
+		var button = document.getElementById('clear');
+		button.addEventListener('click',clear,false);
+
+		var coords = [], points = [];
+		
+		function clear()
+		{
+			ctx.clearRect(0,0,700,700);
+			coords = [];
+			points = [];
+		}
+
+        	cvs.addEventListener('click', function(event){
+        		var x, y;
+			var rect = cvs.getBoundingClientRect(),
+			x = event.clientX - rect.left,
+			y = event.clientY - rect.top;
+
+			if(event.which == 1)
+			{
+				coords.push([x, y]);
+				ctx.strokeStyle = "#F3A505";
+				ctx.fillStyle = "#F3A505";
+				if(coords.length == 1) draw__pixel([x, y]);
+				if(coords.length > 1) draw__line(coords[coords.length - 2], coords[coords.length - 1]);
+			}
+		});
+
+		cvs.addEventListener('contextmenu', function(event){
+			event.preventDefault();
+			for(let t = 0; t < 1.005; t += 0.005)
+			{
+				var line = main__line(t),
+				x = line[0][0] + delta(line[0],line[1])[0]*t,
+				y = line[0][1] + delta(line[0],line[1])[1]*t;
+				points.push([x,y]);
+			}
+			for(let i = 0; i < points.length - 1; i++)
+			{
+				ctx.strokeStyle = "#A5260A";
+				draw__line(points[i],points[i+1]);
+			}
+			coords = [];
+			points = [];
+			
+		});
+
+		function draw__pixel(pt)
+		{
+        		ctx.fillRect(pt[0], pt[1], 1, 1);
+		}
+
+		function draw__line(pt1, pt2)
+		{
+			ctx.beginPath()
+			ctx.lineWidth = 1;
+			ctx.moveTo(pt1[0], pt1[1]);
+			ctx.lineTo(pt2[0], pt2[1]);
+			ctx.stroke();
+		}
+
+		function main__line(t)
+		{
+			var new__coords = coords,
+			line = [];
+			while(new__coords.length > 2)
+			{
+				for(let i = 0; i < new__coords.length - 1; i++)
+				{
+					var x = new__coords[i][0] + delta(new__coords[i],new__coords[i+1])[0]*t,
+					y = new__coords[i][1] + delta(new__coords[i],new__coords[i+1])[1]*t;
+					line.push([x,y]);
+				}
+				new__coords = line;
+				line = [];
+			}
+			return new__coords;
+		}
+
+		function delta(pt1,pt2)
+		{
+			return [pt2[0]-pt1[0],pt2[1]-pt1[1]];
+		}
+	</script>
+</body>
+</html>
