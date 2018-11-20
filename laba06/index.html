@@ -1,5 +1,3 @@
-lab06/index.html
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -64,8 +62,6 @@ lab06/index.html
 		}
 		function process__mouse__click(event, type)
 		{
-			//type = 0 - line
-			//type = 1 - polygon
 			var x, y;
 			var rect = cvs.getBoundingClientRect();
 			x = event.clientX - rect.left;
@@ -91,10 +87,6 @@ lab06/index.html
 				}
 				else if(event.which == 3)
 				{
-				// 	for(let i = 0; i < mouse__coords.length - 1; i++) {
-				// 		draw__line(mouse__coords[i], mouse__coords[i+1]);
-				// 	}
-				// 	draw__line(mouse__coords[mouse__coords.length - 1], mouse__coords[0]);
 					mouse__coords = [];
 					cyrus__beck();
 				}
